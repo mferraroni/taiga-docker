@@ -1,0 +1,41 @@
+version: '2'
+services:
+  postgres:
+    image: postgres
+    container_name: taiga-db
+    volumes:
+      - taiga-db:/var/lib/postgresql/data
+    environment:
+      - "POSTGRES_USER=taiga"
+      - "POSTGRES_DB=taiga"
+      - "POSTGRES_PASSWORD=thisisthetaigapassword"
+
+  taiga-back:
+    image: ipedrazas/taiga-back
+    links:
+        - postgres
+    volumes:
+      - taiga-static:/taiga/static
+      - taiga-media:/taiga/media 
+    ports:
+        - "8000:8000"
+    environment:
+      - "API_NAME=boot2docker"
+
+  taigafront:
+    image: ipedrazas/taiga-front
+    links:
+        - taiga-back
+    ports:
+        - "80:80"
+    environment:
+        - "API_NAME=boot2docker"
+
+volumes:
+  taiga-db:
+    driver: local  
+  taiga-static:
+    driver: local
+  taiga-media:
+    driver: local
+
