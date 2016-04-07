@@ -49,9 +49,7 @@ This change will fix the permission problem when mounting a volume.
 
 **To initialise the database**
 
-    docker run -it --link postgres:postgres --rm postgres sh -c "su postgres --command 'createuser -h "'$POSTGRES_PORT_5432_TCP_ADDR'" -p "'$POSTGRES_PORT_5432_TCP_PORT'" -d -r -s taiga'"
-
-    docker run -it --link postgres:postgres --rm postgres sh -c "su postgres --command 'createdb -h "'$POSTGRES_PORT_5432_TCP_ADDR'" -p "'$POSTGRES_PORT_5432_TCP_PORT'" -O taiga taiga'";
+Database is initialized automatically, username, password and host is in docker-compose-v2.yml
 
 If you want to access the database, run the following container:
 
