@@ -15,6 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os.path, sys, os
+from .development import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -225,10 +226,6 @@ DEFAULT_FILE_STORAGE = "taiga.base.storage.FileSystemStorage"
 
 SECRET_KEY = "aw3+t2r(8(0kkrhg8)gx6i96v5^kv%6cfep9wxfom0%7dy0m9e"
 
-TEMPLATE_LOADERS = [
-    "django_jinja.loaders.AppLoader",
-    "django_jinja.loaders.FileSystemLoader",
-]
 
 MIDDLEWARE_CLASSES = [
     "taiga.base.middleware.cors.CoorsMiddleware",
@@ -244,126 +241,9 @@ MIDDLEWARE_CLASSES = [
     "django.contrib.messages.middleware.MessageMiddleware",
 ]
 
-TEMPLATE_CONTEXT_PROCESSORS = [
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.request",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.static",
-    "django.core.context_processors.tz",
-    "django.contrib.messages.context_processors.messages",
-]
-
 ROOT_URLCONF = "taiga.urls"
 
-TEMPLATE_DIRS = [
-    os.path.join(BASE_DIR, "templates"),
-]
-
-INSTALLED_APPS = [
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.admin",
-    "django.contrib.staticfiles",
-    "django.contrib.sitemaps",
-
-    "taiga.base",
-    "taiga.base.api",
-    "taiga.locale",
-    "taiga.events",
-    "taiga.front",
-    "taiga.users",
-    "taiga.userstorage",
-    "taiga.projects",
-    "taiga.projects.references",
-    "taiga.projects.custom_attributes",
-    "taiga.projects.history",
-    "taiga.projects.notifications",
-    "taiga.projects.attachments",
-    "taiga.projects.votes",
-    "taiga.projects.milestones",
-    "taiga.projects.userstories",
-    "taiga.projects.tasks",
-    "taiga.projects.issues",
-    "taiga.projects.wiki",
-    "taiga.searches",
-    "taiga.timeline",
-    "taiga.mdrender",
-    "taiga.export_import",
-    "taiga.feedback",
-    "taiga.stats",
-    "taiga.hooks.github",
-    "taiga.hooks.gitlab",
-    "taiga.hooks.bitbucket",
-    "taiga.webhooks",
-
-    "djmail",
-    "django_jinja",
-    "django_jinja.contrib._humanize",
-    "sr",
-    "easy_thumbnails",
-    "raven.contrib.django.raven_compat",
-    "django_transactional_cleanup",
-]
-
 WSGI_APPLICATION = "taiga.wsgi.application"
-
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": True,
-    "filters": {
-        "require_debug_false": {
-            "()": "django.utils.log.RequireDebugFalse"
-        }
-    },
-    "formatters": {
-        "complete": {
-            "format": "%(levelname)s:%(asctime)s:%(module)s %(message)s"
-        },
-        "simple": {
-            "format": "%(levelname)s:%(asctime)s: %(message)s"
-        },
-        "null": {
-            "format": "%(message)s",
-        },
-    },
-    "handlers": {
-        "null": {
-            "level":"DEBUG",
-            "class":"django.utils.log.NullHandler",
-        },
-        "console":{
-            "level":"DEBUG",
-            "class":"logging.StreamHandler",
-            "formatter": "simple",
-        },
-        "mail_admins": {
-            "level": "ERROR",
-            "filters": ["require_debug_false"],
-            "class": "django.utils.log.AdminEmailHandler",
-        }
-    },
-    "loggers": {
-        "django": {
-            "handlers":["null"],
-            "propagate": True,
-            "level":"INFO",
-        },
-        "django.request": {
-            "handlers": ["mail_admins", "console"],
-            "level": "ERROR",
-            "propagate": False,
-        },
-        "taiga": {
-            "handlers": ["console"],
-            "level": "DEBUG",
-            "propagate": False,
-        }
-    }
-}
-
 
 AUTH_USER_MODEL = "users.User"
 FORMAT_MODULE_PATH = "taiga.base.formats"
@@ -474,7 +354,6 @@ WEBHOOKS_ENABLED = False
 # If is True /front/sitemap.xml show a valid sitemap of taiga-front client
 FRONT_SITEMAP_ENABLED = False
 FRONT_SITEMAP_CACHE_TIMEOUT = 24*60*60  # In second
-
 
 from .sr import *
 
