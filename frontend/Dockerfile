@@ -6,7 +6,7 @@
 ##
 ###############################################################
 
-FROM nginx
+FROM nginx:stable-alpine
 
 COPY taiga-front-dist/dist /taiga
 COPY plugins/ /taiga/plugins
