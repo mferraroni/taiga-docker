@@ -9,6 +9,7 @@
 FROM nginx
 
 COPY taiga-front-dist/dist /taiga
+COPY plugins/ /taiga/plugins
 COPY conf.json /taiga/conf.json
 COPY run.sh /taiga/run.sh
 COPY nginx.conf /etc/nginx/nginx.conf
